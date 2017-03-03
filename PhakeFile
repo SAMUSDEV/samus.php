@@ -1,0 +1,27 @@
+<?php
+
+function build() {
+	$build_file = "build";
+	$build = (int)file_get_contents($build_file);
+	$build ++;
+	file_put_contents($build_file, $build);
+
+	echo "build: ". $build;
+
+	$cmd_merge = "find ./src/ -iname \"*.php\" -exec cat \"{}\" \; > bin/Samus.php";
+	shell_exec($cmd_merge);
+
+	$file = file_get_contents("bin/Samus.php");
+	$file = str_replace("<?php", "", $file);
+	$file = str_replace("<?", "", $file);
+	$file = "<?php \n". $file;
+	file_put_contents("bin/Samus.php", $file);
+
+	shell_exec("phpc bin/ false");
+
+
+	echo "\n";
+	echo "\n";
+}
+	
+?>
