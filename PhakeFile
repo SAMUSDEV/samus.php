@@ -13,7 +13,7 @@ function build() {
 
 	$file = file_get_contents("bin/Samus.php");
 	$file = str_replace("<?php", "", $file);
-	$file = str_replace("<?", "", $file);
+	//$file = str_replace("<?", "", $file);
 	$file = "<?php \n". $file;
 	file_put_contents("bin/Samus.php", $file);
 
